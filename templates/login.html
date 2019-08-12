@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="container">
+    <form method="POST" class="form-group">
+            <label for="email"><b>Email</b></label>
+            <input class="form-control" type="text" placeholder="Enter Email" name="email" required>
+            <label for="password"><b>Password</b></label>
+            <input class="form-control" type="password" placeholder="password" name="password" required>
+            <button class="btn btn-dark mt-3" type="submit">Login</button>
+            <h6 class="mt-4"><a href="{{ url_for('register') }}">No Account? Register Now.</a></h6>
+    </form>
+</div>
+{% endblock %}

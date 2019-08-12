@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container text-center">
+    <!--alert message when logged in-->
+    {% if message %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Hello <strong>{{ username }}!</strong> You are successfully logged in.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+    <!--body starts-->
+    <h1 class="py-4">Explore the world of books.</h1>
+    <form class="form-inline d-block" method="POST">
+        <input type="text" name="searchQuery" class="form-control searchTerm" placeholder="What are you looking for?">
+        <button type="submit" class="searchButton btn btn-dark ml-1">Search</button>
+    </form>
+</div>
+<div class="container text-center p-5">
+    {% if searchQuery is defined %}
+        <h4>Search result for "{{ searchQuery }}"</h4>
+    {% else %}
+        <h4>See some of our selections</h4> 
+    {% endif %}
+    {% for i in all_books %}
+        <span class="col-6">
+            <img class="m-2 shadow-sm" width="99" src="http://covers.openlibrary.org/b/isbn/{{ i.isbn }}-M.jpg">
+        </span>
+    {% endfor %}
+</div>
+    <div class="container">
+        <ul class="list-group list-group-flush">
+            {% for book in books %}
+                    <li class="list-group-item">
+                        <img src="http://covers.openlibrary.org/b/isbn/{{ book.isbn }}-S.jpg">
+                        <span class="ml-2"><a href="{{ url_for('book',isbn=book.isbn) }}">{{ book.title }} by {{ book.author }}</a></span>
+                    </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
